@@ -43,11 +43,7 @@ Now activate the environment:
 		langgraph_env3\Scripts\activate
 
 
-#### YouTube Tuturial (Hindi) - https://youtu.be/ctHby5vhDqg
 
-#### YouTube Tuturial (English) -  https://youtu.be/_5XF5CCnbDk
-
----
 
 # Step 2: Install Dependencies
 
@@ -57,29 +53,6 @@ Run the following command:
 
 		pip install -U "psycopg[binary,pool]"  langgraph-checkpoint-postgres
 
----
-
-# Step 3: Install PostgreSQL
-
-Download and install PostgreSQL: https://www.postgresql.org/download/
-
-⚠️ Important:
-While installing PostgreSQL, remember:
-- PostgreSQL Password
-- Port Number
-
-You will need them later while creating the database connection string.
-
----
-
-# Step 4: Create Database
-
-Open PostgreSQL and run:
-
-CREATE DATABASE langgraph_memory_demo;
-
-
----
 
 # Step 5: Setup `.env` File
 
