@@ -1,0 +1,46 @@
+# =================================================================
+# Docker Compose configuration for AI Travel Planning System
+# Includes both the Multi-Agent Streamlit Application and PostgreSQL
+# =================================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: travel_planner_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: langgraph_memory
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d langgraph_memory"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: travel_planner_app
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      # Automatically points to the containerized postgres service
+      - DATABASE_URL=postgresql://postgres:root@postgres:5432/langgraph_memory
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      # Optional: persist generated markdown travel plans to the host
+      - ./travel_plans:/app/travel_plans
+
+volumes:
+  postgres_data:

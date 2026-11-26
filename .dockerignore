@@ -1,0 +1,19 @@
+# Version control and environment
+.git/
+.gitignore
+.gitattributes
+langgraph_env3/
+venv/
+env/
+.env.local
+
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Saved artifacts
+travel_plans/
+*.md
